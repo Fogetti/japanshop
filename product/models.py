@@ -16,6 +16,13 @@ class ProductCategory(TimeStampedModel):
     return self.name
 
 
+class ProductStorageLocation(TimeStampedModel):
+  address = AddressField(on_delete=models.PROTECT)
+
+  def __str__(self):
+    return '%s' % self.address
+
+
 class Product(TimeStampedModel):
 
   id = models.UUIDField(
@@ -41,24 +48,35 @@ class Product(TimeStampedModel):
   image3 = models.ImageField(blank=True)
   image4 = models.ImageField(blank=True)
 
-  order = models.ManyToManyField(Order, blank=True)
-  sale = models.ManyToManyField(Sale, blank=True)
-  campaign = models.ManyToManyField(Campaign, blank=True)
-
   def __str__(self):
     return self.name
 
 
-class ProductStorageLocation(TimeStampedModel):
-  address = AddressField(on_delete=models.PROTECT)
+class ProductOrder(TimeStampedModel):
+  product = models.ForeignKey(Product, on_delete=models.CASCADE)
+  order = models.ForeignKey(Order, on_delete=models.CASCADE)
+  product_quantity = models.IntegerField()
 
-  product = models.ForeignKey(
-    Product,
-    on_delete=models.CASCADE
-  )
+  class Meta:
+    unique_together = ('product', 'order',)
 
-  def __str__(self):
-    return '%s' % self.address
+
+class ProductSale(TimeStampedModel):
+  product = models.ForeignKey(Product, on_delete=models.CASCADE)
+  sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
+  remaining_quantity = models.IntegerField()
+
+  class Meta:
+    unique_together = ('product', 'sale',)
+
+
+class ProductCampaign(TimeStampedModel):
+  product = models.ForeignKey(Product, on_delete=models.CASCADE)
+  campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
+  remaining_quantity = models.IntegerField()
+
+  class Meta:
+    unique_together = ('product', 'campaign',)
 
 
 class ProductStatus(TimeStampedModel):
@@ -76,13 +94,21 @@ class ProductStatus(TimeStampedModel):
       max_length=3
   )
 
+  product = models.ForeignKey(
+      Product,
+      on_delete=models.CASCADE
+  )
+
   product_location = models.ForeignKey(
-    ProductStorageLocation,
-    on_delete=models.CASCADE
+      ProductStorageLocation,
+      on_delete=models.CASCADE
   )
 
   def __str__(self):
     return '%s' % self.get_in_stock_display()
+  
+  class Meta:
+    unique_together = ('product', 'product_location')
 
 
 class ProductPrice(TimeStampedModel):
@@ -91,23 +117,26 @@ class ProductPrice(TimeStampedModel):
   JPY = 'JPY'
 
   CURRENCY_CHOICES = (
-    (HUF, _('Hungarian Forint')),
-    (USD, _('US Dollar')),
-    (JPY, _('Japanese Yen')),
+      (HUF, _('Hungarian Forint')),
+      (USD, _('US Dollar')),
+      (JPY, _('Japanese Yen')),
   )
 
   currency = models.CharField(
-    choices=CURRENCY_CHOICES,
-    default=HUF,
-    max_length=3
+      choices=CURRENCY_CHOICES,
+      default=HUF,
+      max_length=3
   )
 
   price = models.IntegerField()
 
   product = models.ForeignKey(
-    Product,
-    on_delete=models.CASCADE
+      Product,
+      on_delete=models.CASCADE
   )
 
   def __str__(self):
     return '%s [%s]' % (self.price, self.get_currency_display())
+
+  class Meta:
+    unique_together = ('product', 'currency')

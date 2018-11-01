@@ -107,6 +107,8 @@ class ProductStatusSerializer(serializers.ModelSerializer):
     fields = (
       'id',
       'in_stock',
+      'product',
+      'product_location',
       'links',
     )
   
@@ -128,6 +130,7 @@ class ProductPriceSerializer(serializers.ModelSerializer):
     model = ProductPrice
     fields = (
       'id',
+      'product',
       'currency',
       'price',
       'links',

@@ -64,7 +64,7 @@ class ProductStorageLocationViewSet(DefaultsMixin, viewsets.ModelViewSet):
   ordering_fields = ('address', )
 
 class ProductStatusViewSet(DefaultsMixin, viewsets.ModelViewSet):
-  """ API endpoint for listing and creating product storage locations """
+  """ API endpoint for listing and creating product statuses """
 
   lookup_field = 'id'
   lookup_url_kwarg = 'id'
@@ -74,11 +74,11 @@ class ProductStatusViewSet(DefaultsMixin, viewsets.ModelViewSet):
   ordering_fields = ('in_stock', )
 
 class ProductPriceViewSet(DefaultsMixin, viewsets.ModelViewSet):
-  """ API endpoint for listing and creating product storage locations """
+  """ API endpoint for listing and creating product prices """
 
-  lookup_field = 'currency'
-  lookup_url_kwarg = 'currency'
+  lookup_field = 'id'
+  lookup_url_kwarg = 'id'
   queryset = ProductPrice.objects.order_by('price')
   serializer_class = ProductPriceSerializer
-  search_fields = ('currency', 'price', )
-  ordering_fields = ('price', )
+  search_fields = ('product', 'currency', 'price', )
+  ordering_fields = ('product', 'price', )

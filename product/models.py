@@ -1,21 +1,25 @@
 import uuid
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from model_utils.models import TimeStampedModel
 
-from shop.models import Sale, Campaign
-from order.models import Order
+# Create your models here.
+class ProductStorageLocation(TimeStampedModel):
 
-class ProductCategory(TimeStampedModel):
+  def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+    if (self.japanese_address and self.hungarian_address):
+      raise ValidationError('There must be only one address defined')
+    return super().save(force_insert, force_update, using, update_fields)
 
-  name = models.CharField(max_length=50, unique=True)
-  description = models.CharField(max_length=300, blank=True)
+  class Meta:
+    verbose_name = _('Product storage location')
+    verbose_name_plural = _('Product storage locations')
 
   def __str__(self):
-    return self.name
+    return '%s' % self.address
 
 
-class ProductStorageLocation(TimeStampedModel):
 class HungarianAddress(TimeStampedModel):
   city = models.TextField(_('city'), help_text=_('The type of munacipility e.g. city, village, etc'))
   street_name = models.TextField(_('street name'))
@@ -32,7 +36,6 @@ class HungarianAddress(TimeStampedModel):
     verbose_name_plural = _('Hungarian addresses')
   
   def __str__(self):
-    return '%s' % self.address
     return '%s %s %s %s' % (self.postal_code, self.city, self.street_name, self.house_number)
 
 
@@ -66,6 +69,16 @@ class JapaneseAddress(TimeStampedModel):
     return '%s %s %s %s %s' % (self.postal_code, self.city, self.chome, self.ban, self.go)
 
 
+class ProductCategory(TimeStampedModel):
+  name = models.CharField(_('name'), max_length=50, unique=True)
+  description = models.CharField(_('description'), max_length=300, blank=True)
+
+  class Meta:
+    verbose_name = _('Product category')
+    verbose_name_plural = _('Product categories')
+
+  def __str__(self):
+    return self.name
 
 
 class Product(TimeStampedModel):
@@ -84,14 +97,18 @@ class Product(TimeStampedModel):
     related_name='products'
   )
 
-  name = models.CharField(max_length=300)
+  name = models.CharField(_('name'), max_length=300)
 
-  description = models.TextField(blank=True)
+  description = models.TextField(_('descrition'), blank=True)
 
-  image1 = models.ImageField(blank=True)
-  image2 = models.ImageField(blank=True)
-  image3 = models.ImageField(blank=True)
-  image4 = models.ImageField(blank=True)
+  image1 = models.ImageField(_('image1'), blank=True)
+  image2 = models.ImageField(_('image1'), blank=True)
+  image3 = models.ImageField(_('image1'), blank=True)
+  image4 = models.ImageField(_('image1'), blank=True)
+
+  class Meta:
+    verbose_name = _('Product')
+    verbose_name_plural = _('Products')
 
   def __str__(self):
     return self.name
@@ -99,8 +116,8 @@ class Product(TimeStampedModel):
 
 class ProductOrder(TimeStampedModel):
   product = models.ForeignKey(Product, on_delete=models.CASCADE)
-  order = models.ForeignKey(Order, on_delete=models.CASCADE)
-  product_quantity = models.IntegerField()
+  order = models.ForeignKey('order.Order', on_delete=models.CASCADE)
+  product_quantity = models.IntegerField(_('product quantity'))
 
   class Meta:
     unique_together = ('product', 'order',)
@@ -108,8 +125,8 @@ class ProductOrder(TimeStampedModel):
 
 class ProductSale(TimeStampedModel):
   product = models.ForeignKey(Product, on_delete=models.CASCADE)
-  sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
-  remaining_quantity = models.IntegerField()
+  sale = models.ForeignKey('shop.Sale', on_delete=models.CASCADE)
+  remaining_quantity = models.IntegerField(_('remaining quantity'))
 
   class Meta:
     unique_together = ('product', 'sale',)
@@ -117,8 +134,8 @@ class ProductSale(TimeStampedModel):
 
 class ProductCampaign(TimeStampedModel):
   product = models.ForeignKey(Product, on_delete=models.CASCADE)
-  campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
-  remaining_quantity = models.IntegerField()
+  campaign = models.ForeignKey('shop.Campaign', on_delete=models.CASCADE)
+  remaining_quantity = models.IntegerField(_('remaining quantity'))
 
   class Meta:
     unique_together = ('product', 'campaign',)
@@ -134,12 +151,13 @@ class ProductStatus(TimeStampedModel):
   )
 
   in_stock = models.CharField(
+      _('in stock'),
       choices=STOCK_CHOICES,
       default=IN_STOCK,
       max_length=3
   )
 
-  product = models.ForeignKey(
+  product = models.OneToOneField(
       Product,
       on_delete=models.CASCADE
   )
@@ -149,12 +167,14 @@ class ProductStatus(TimeStampedModel):
       on_delete=models.CASCADE
   )
 
+  class Meta:
+    unique_together = ('product', 'product_location')
+    verbose_name = _('Product status')
+    verbose_name_plural = _('Product status')
+
   def __str__(self):
     return '%s' % self.get_in_stock_display()
   
-  class Meta:
-    unique_together = ('product', 'product_location')
-
 
 class ProductPrice(TimeStampedModel):
   HUF = 'HUF'
@@ -168,20 +188,23 @@ class ProductPrice(TimeStampedModel):
   )
 
   currency = models.CharField(
+      _('currency'),
       choices=CURRENCY_CHOICES,
       default=HUF,
       max_length=3
   )
 
-  price = models.IntegerField()
+  price = models.IntegerField(_('price'))
 
-  product = models.ForeignKey(
+  product = models.OneToOneField(
       Product,
       on_delete=models.CASCADE
   )
 
-  def __str__(self):
-    return '%s [%s]' % (self.price, self.get_currency_display())
-
   class Meta:
     unique_together = ('product', 'currency')
+    verbose_name = _('Product price')
+    verbose_name_plural = _('Product price')
+
+  def __str__(self):
+    return '%s [%s]' % (self.price, self.get_currency_display())

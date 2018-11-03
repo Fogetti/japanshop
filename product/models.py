@@ -99,7 +99,7 @@ class Product(TimeStampedModel):
 
   name = models.CharField(_('name'), max_length=300)
 
-  description = models.TextField(_('descrition'), blank=True)
+  description = models.TextField(_('description'), blank=True)
 
   image1 = models.ImageField(_('image1'), blank=True)
   image2 = models.ImageField(_('image1'), blank=True)

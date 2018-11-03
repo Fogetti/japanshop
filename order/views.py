@@ -12,5 +12,5 @@ class OrderViewSet(DefaultsMixin, viewsets.ModelViewSet):
 
   queryset = Order.objects.order_by('assigned')
   serializer_class = OrderSerializer
-  search_fields = ('notes', 'assigned', )
-  ordering_fields = ('notes', 'assigned', )
+  search_fields = ('remarks', 'assigned', )
+  ordering_fields = ('remarks', 'assigned', )

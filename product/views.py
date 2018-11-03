@@ -58,10 +58,10 @@ class ProductStorageLocationViewSet(DefaultsMixin, viewsets.ModelViewSet):
 
   lookup_field = 'id'
   lookup_url_kwarg = 'id'
-  queryset = ProductStorageLocation.objects.order_by('address')
+  queryset = ProductStorageLocation.objects.order_by('japanese_address')
   serializer_class = ProductStorageLocationSerializer
-  search_fields = ('address', )
-  ordering_fields = ('address', )
+  search_fields = ('japanese_address', 'hungarian_address')
+  ordering_fields = ('japanese_address', 'hungarian_address')
 
 class ProductStatusViewSet(DefaultsMixin, viewsets.ModelViewSet):
   """ API endpoint for listing and creating product statuses """

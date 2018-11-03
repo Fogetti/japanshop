@@ -16,7 +16,6 @@ class ProductOrderSerializer(serializers.HyperlinkedModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
   links = serializers.SerializerMethodField(source='get_links')
-  # products = ProductOrderSerializer(source='productorder_set', many=True)
   products = serializers.PrimaryKeyRelatedField(
       queryset=Product.objects.all(), many=True)
 
@@ -24,7 +23,7 @@ class OrderSerializer(serializers.ModelSerializer):
     model = Order
     fields = (
       'id',
-      'notes',
+      'remarks',
       'assigned',
       'products',
       'links',

@@ -10,8 +10,12 @@ class UserSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = User
-    fields = (User.USERNAME_FIELD, 'first_name', 'last_name',
-              'other_name', 'address', 'billing_address', 'is_active', 'links')
+    fields = (User.USERNAME_FIELD,
+      'first_name', 'last_name', 'other_name',
+      'japanese_address', 'japanese_billing_address',
+      'hungarian_billing_address', 'hungarian_address',
+      'is_active', 'links'
+    )
 
   def get_links(self, obj):
     request = self.context['request']

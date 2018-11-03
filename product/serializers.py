@@ -84,7 +84,8 @@ class ProductStorageLocationSerializer(serializers.ModelSerializer):
     model = ProductStorageLocation
     fields = (
       'id',
-      'address',
+      'japanese_address',
+      'hungarian_address',
       'links',
     )
   

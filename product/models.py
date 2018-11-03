@@ -3,7 +3,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from model_utils.models import TimeStampedModel
 
-from address.models import AddressField
 from shop.models import Sale, Campaign
 from order.models import Order
 
@@ -17,10 +16,56 @@ class ProductCategory(TimeStampedModel):
 
 
 class ProductStorageLocation(TimeStampedModel):
-  address = AddressField(on_delete=models.PROTECT)
+class HungarianAddress(TimeStampedModel):
+  city = models.TextField(_('city'), help_text=_('The type of munacipility e.g. city, village, etc'))
+  street_name = models.TextField(_('street name'))
+  street_type = models.TextField(_('street type'))
+  house_number = models.TextField(_('house number'))  # [FLOOR] [APARTMENT]
+  postal_code = models.TextField(_('recipient'))
+  country = models.TextField(_('country'))
 
+  storage_location = models.OneToOneField(
+      ProductStorageLocation, on_delete=models.CASCADE, related_name='hungarian_address')
+
+  class Meta:
+    verbose_name = _('Hungarian address')
+    verbose_name_plural = _('Hungarian addresses')
+  
   def __str__(self):
     return '%s' % self.address
+    return '%s %s %s %s' % (self.postal_code, self.city, self.street_name, self.house_number)
+
+
+class JapaneseAddress(TimeStampedModel):
+  building = models.TextField(_('building'),
+    help_text=_('The name of the building'))
+  apartment = models.TextField(_('apartment'),
+    help_text=_('Room number'))
+  chome = models.TextField(_('chome'),
+    help_text=_('The first number in the triplet ◯町目◯番◯号'))
+  ban = models.TextField(_('ban'),
+    help_text=_('The second number in the triplet ◯町目◯番◯号'))
+  go = models.TextField(_('go'),
+    help_text=_('The third number in the triplet ◯町目◯番◯号'))
+  ward = models.TextField(_('ward'),
+    help_text=_('Ward or island'))  # [ISLAND]
+  city = models.TextField(_('city'))
+  prefecture = models.TextField(_('prefecture'))
+  postal_code = models.TextField(_('postal code'))
+  country = models.TextField(_('country'))
+  p_o_box = models.TextField(_('P.O. box'))
+  
+  storage_location = models.OneToOneField(
+      ProductStorageLocation, on_delete=models.CASCADE, related_name='japanese_address')
+
+  class Meta:
+    verbose_name = _('Japanese address')
+    verbose_name_plural = _('Japanese addresses')
+
+  def __str__(self):
+    return '%s %s %s %s %s' % (self.postal_code, self.city, self.chome, self.ban, self.go)
+
+
 
 
 class Product(TimeStampedModel):

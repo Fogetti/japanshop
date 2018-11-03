@@ -1,4 +1,5 @@
 .vscode/**
 **/*.pyc
+**/*.mo
 **/__pycache__
 galaxy.jpg

@@ -29,7 +29,11 @@ class HungarianAddress(TimeStampedModel):
   country = models.TextField(_('country'))
 
   storage_location = models.OneToOneField(
-      ProductStorageLocation, on_delete=models.CASCADE, related_name='hungarian_address')
+      ProductStorageLocation,
+      on_delete=models.CASCADE,
+      related_name='hungarian_address',
+      verbose_name=_('storage_location')
+    )
 
   class Meta:
     verbose_name = _('Hungarian address')
@@ -59,7 +63,11 @@ class JapaneseAddress(TimeStampedModel):
   p_o_box = models.TextField(_('P.O. box'))
   
   storage_location = models.OneToOneField(
-      ProductStorageLocation, on_delete=models.CASCADE, related_name='japanese_address')
+      ProductStorageLocation,
+      on_delete=models.CASCADE,
+      related_name='japanese_address',
+      verbose_name=_('storage_location')
+    )
 
   class Meta:
     verbose_name = _('Japanese address')
@@ -94,7 +102,8 @@ class Product(TimeStampedModel):
     ProductCategory,
     on_delete=models.SET_NULL,
     null=True,
-    related_name='products'
+    related_name='products',
+    verbose_name=_('category')
   )
 
   name = models.CharField(_('name'), max_length=300)
@@ -102,9 +111,9 @@ class Product(TimeStampedModel):
   description = models.TextField(_('description'), blank=True)
 
   image1 = models.ImageField(_('image1'), blank=True)
-  image2 = models.ImageField(_('image1'), blank=True)
-  image3 = models.ImageField(_('image1'), blank=True)
-  image4 = models.ImageField(_('image1'), blank=True)
+  image2 = models.ImageField(_('image2'), blank=True)
+  image3 = models.ImageField(_('image3'), blank=True)
+  image4 = models.ImageField(_('image4'), blank=True)
 
   class Meta:
     verbose_name = _('Product')
@@ -115,8 +124,10 @@ class Product(TimeStampedModel):
 
 
 class ProductOrder(TimeStampedModel):
-  product = models.ForeignKey(Product, on_delete=models.CASCADE)
-  order = models.ForeignKey('order.Order', on_delete=models.CASCADE)
+  product = models.ForeignKey(
+      Product, on_delete=models.CASCADE, verbose_name=_('product'))
+  order = models.ForeignKey(
+      'order.Order', on_delete=models.CASCADE, verbose_name=_('order'))
   product_quantity = models.IntegerField(_('product quantity'))
 
   class Meta:
@@ -124,8 +135,10 @@ class ProductOrder(TimeStampedModel):
 
 
 class ProductSale(TimeStampedModel):
-  product = models.ForeignKey(Product, on_delete=models.CASCADE)
-  sale = models.ForeignKey('shop.Sale', on_delete=models.CASCADE)
+  product = models.ForeignKey(
+      Product, on_delete=models.CASCADE, verbose_name=_('product'))
+  sale = models.ForeignKey(
+      'shop.Sale', on_delete=models.CASCADE, verbose_name=_('sale'))
   remaining_quantity = models.IntegerField(_('remaining quantity'))
 
   class Meta:
@@ -133,8 +146,10 @@ class ProductSale(TimeStampedModel):
 
 
 class ProductCampaign(TimeStampedModel):
-  product = models.ForeignKey(Product, on_delete=models.CASCADE)
-  campaign = models.ForeignKey('shop.Campaign', on_delete=models.CASCADE)
+  product = models.ForeignKey(
+      Product, on_delete=models.CASCADE, verbose_name=_('product'))
+  campaign = models.ForeignKey(
+      'shop.Campaign', on_delete=models.CASCADE, verbose_name=_('campaign'))
   remaining_quantity = models.IntegerField(_('remaining quantity'))
 
   class Meta:
@@ -159,12 +174,14 @@ class ProductStatus(TimeStampedModel):
 
   product = models.OneToOneField(
       Product,
-      on_delete=models.CASCADE
+      on_delete=models.CASCADE,
+      verbose_name=_('product')
   )
 
   product_location = models.ForeignKey(
       ProductStorageLocation,
-      on_delete=models.CASCADE
+      on_delete=models.CASCADE,
+      verbose_name=_('product_location')
   )
 
   class Meta:
@@ -198,7 +215,8 @@ class ProductPrice(TimeStampedModel):
 
   product = models.OneToOneField(
       Product,
-      on_delete=models.CASCADE
+      on_delete=models.CASCADE,
+      verbose_name=_('product')
   )
 
   class Meta:

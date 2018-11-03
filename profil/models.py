@@ -9,13 +9,37 @@ class User(AbstractUser, TimeStampedModel):
   profile_image = models.ImageField(_('profile image'), blank=True)
 
   japanese_address = models.OneToOneField(
-      'product.JapaneseAddress', on_delete=models.PROTECT, null=True, blank=True, related_name='user_jp_adr')
+      'product.JapaneseAddress',
+      on_delete=models.PROTECT,
+      null=True,
+      blank=True,
+      related_name='user_jp_adr',
+      verbose_name=_('japanese_address')
+    )
   japanese_billing_address = models.OneToOneField(
-      'product.JapaneseAddress', on_delete=models.PROTECT, null=True, blank=True, related_name='user_jp_bill_adr')
+      'product.JapaneseAddress',
+      on_delete=models.PROTECT,
+      null=True,
+      blank=True,
+      related_name='user_jp_bill_adr',
+      verbose_name=_('japanese_billing_address')
+    )
   hungarian_address = models.OneToOneField(
-      'product.HungarianAddress', on_delete=models.PROTECT, null=True, blank=True, related_name='user_hu_adr')
+      'product.HungarianAddress',
+      on_delete=models.PROTECT,
+      null=True,
+      blank=True,
+      related_name='user_hu_adr',
+      verbose_name=_('hungarian_address')
+    )
   hungarian_billing_address = models.OneToOneField(
-      'product.HungarianAddress', on_delete=models.PROTECT, null=True, blank=True, related_name='user_hu_bill_adr')
+      'product.HungarianAddress',
+      on_delete=models.PROTECT,
+      null=True,
+      blank=True,
+      related_name='user_hu_bill_adr',
+      verbose_name=_('hungarian_billing_address')
+    )
 
   class Meta:
     verbose_name = _('User')

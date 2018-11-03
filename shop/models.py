@@ -5,9 +5,9 @@ from django.utils.translation import ugettext_lazy as _
 class Sale(TimeStampedModel):
   start_date_time = models.DateTimeField(_('start date and time'))
   period = models.DurationField(_('period'))
-  description = models.TextField('description')
+  description = models.TextField(_('description'))
   products = models.ManyToManyField(
-    'product.Product', blank=True, through='product.ProductSale', related_name='sale_products')
+    'product.Product', blank=True, through='product.ProductSale', related_name='sale_products', verbose_name=_('products'))
 
   class Meta:
     verbose_name = _('Sale')
@@ -21,7 +21,7 @@ class Campaign(TimeStampedModel):
   period = models.DurationField(_('period'))
   description = models.TextField(_('description'))
   products = models.ManyToManyField(
-    'product.Product', blank=True, through='product.ProductCampaign', related_name='campaign_products')
+    'product.Product', blank=True, through='product.ProductCampaign', related_name='campaign_products', verbose_name=_('products'))
 
   class Meta:
     verbose_name = _('Campaign')

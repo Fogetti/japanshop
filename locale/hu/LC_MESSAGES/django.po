@@ -1,0 +1,319 @@
+# Hungarian translations for the Japanese shop.
+# This file is distributed under the same license as the japanshop package.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: v0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-03 22:25+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: order/models.py:8
+msgid "remarks"
+msgstr "Megjegyzések"
+
+#: order/models.py:14
+msgid "assigned"
+msgstr "Rendelés feladója"
+
+#: order/models.py:21 shop/models.py:10 shop/models.py:24
+msgid "products"
+msgstr "Termékek"
+
+#: order/models.py:25
+msgid "Order"
+msgstr "Rendelés"
+
+#: order/models.py:26
+msgid "Orders"
+msgstr "Rendelések"
+
+#: product/models.py:16
+msgid "Product storage location"
+msgstr "Termék raktározási helye"
+
+#: product/models.py:17
+msgid "Product storage locations"
+msgstr "Termék raktározási helyek"
+
+#: product/models.py:24 product/models.py:59
+msgid "city"
+msgstr "Város"
+
+#: product/models.py:24
+msgid "The type of munacipility e.g. city, village, etc"
+msgstr "A helység típusa pl. város, falu, stb."
+
+#: product/models.py:25
+msgid "street name"
+msgstr "Utca név"
+
+#: product/models.py:26
+msgid "street type"
+msgstr "Utca típusa"
+
+#: product/models.py:27
+msgid "house number"
+msgstr "Házszám"
+
+#: product/models.py:28
+msgid "recipient"
+msgstr "Címzett"
+
+#: product/models.py:29 product/models.py:62
+msgid "country"
+msgstr "Ország"
+
+#: product/models.py:35 product/models.py:69
+msgid "storage_location"
+msgstr "Termék raktározási helye"
+
+#: product/models.py:39
+msgid "Hungarian address"
+msgstr "Magyar cím"
+
+#: product/models.py:40
+msgid "Hungarian addresses"
+msgstr "Magyar címek"
+
+#: product/models.py:47
+msgid "building"
+msgstr "Épület"
+
+#: product/models.py:48
+msgid "The name of the building"
+msgstr "Az épület neve"
+
+#: product/models.py:49
+msgid "apartment"
+msgstr "Lakás"
+
+#: product/models.py:50
+msgid "Room number"
+msgstr "Ajtó (száma)"
+
+#: product/models.py:51
+msgid "chome"
+msgstr "Csóme"
+
+#: product/models.py:52
+msgid "The first number in the triplet ◯町目◯番◯号"
+msgstr "Ez az első szám a ◯町目◯番◯号 hármasban"
+
+#: product/models.py:53
+msgid "ban"
+msgstr "Ban"
+
+#: product/models.py:54
+msgid "The second number in the triplet ◯町目◯番◯号"
+msgstr "Ez a második szám a ◯町目◯番◯号 hármasban"
+
+#: product/models.py:55
+msgid "go"
+msgstr "Gó"
+
+#: product/models.py:56
+msgid "The third number in the triplet ◯町目◯番◯号"
+msgstr "Ez a harmadik szám a ◯町目◯番◯号 hármasban"
+
+#: product/models.py:57
+msgid "ward"
+msgstr "Kerület"
+
+#: product/models.py:58
+msgid "Ward or island"
+msgstr "Kerület vagy sziget"
+
+#: product/models.py:60
+msgid "prefecture"
+msgstr "Prefektúra"
+
+#: product/models.py:61
+msgid "postal code"
+msgstr "Irányítószám"
+
+#: product/models.py:63
+msgid "P.O. box"
+msgstr "Postafiók"
+
+#: product/models.py:73
+msgid "Japanese address"
+msgstr "Japán cím"
+
+#: product/models.py:74
+msgid "Japanese addresses"
+msgstr "Japán címek"
+
+#: product/models.py:81 product/models.py:109
+msgid "name"
+msgstr "Név"
+
+#: product/models.py:82 product/models.py:111 shop/models.py:8
+#: shop/models.py:22
+msgid "description"
+msgstr "Leírás"
+
+#: product/models.py:85
+msgid "Product category"
+msgstr "Termék kategória"
+
+#: product/models.py:86
+msgid "Product categories"
+msgstr "Termék kategóriák"
+
+#: product/models.py:106
+msgid "category"
+msgstr "Termék kategória"
+
+#: product/models.py:113
+msgid "image1"
+msgstr "1. számú kép"
+
+#: product/models.py:114
+msgid "image2"
+msgstr "2. számú kép"
+
+#: product/models.py:115
+msgid "image3"
+msgstr "3. számú kép"
+
+#: product/models.py:116
+msgid "image4"
+msgstr "4. számú kép"
+
+#: product/models.py:119
+msgid "Product"
+msgstr "Termék"
+
+#: product/models.py:120
+msgid "Products"
+msgstr "Termékek"
+
+#: product/models.py:128 product/models.py:139 product/models.py:150
+#: product/models.py:178 product/models.py:219
+msgid "product"
+msgstr "Termék"
+
+#: product/models.py:130
+msgid "order"
+msgstr "Rendelés"
+
+#: product/models.py:131
+msgid "product quantity"
+msgstr "Termék mennyiség"
+
+#: product/models.py:141
+msgid "sale"
+msgstr "Leárazás"
+
+#: product/models.py:142 product/models.py:153
+msgid "remaining quantity"
+msgstr "Fennmaradó mennyiség"
+
+#: product/models.py:152
+msgid "campaign"
+msgstr "Kampány"
+
+#: product/models.py:164
+msgid "In Stock"
+msgstr "Raktáron"
+
+#: product/models.py:165
+msgid "Out of Stock"
+msgstr "Kifogyott"
+
+#: product/models.py:169
+msgid "in stock"
+msgstr "Raktáron"
+
+#: product/models.py:184
+msgid "product_location"
+msgstr "Termék raktározási helye"
+
+#: product/models.py:189 product/models.py:190
+msgid "Product status"
+msgstr "Termék státusz"
+
+#: product/models.py:202
+msgid "Hungarian Forint"
+msgstr "Magyar forint"
+
+#: product/models.py:203
+msgid "US Dollar"
+msgstr "Amerikai dollár"
+
+#: product/models.py:204
+msgid "Japanese Yen"
+msgstr "Japán jen"
+
+#: product/models.py:208
+msgid "currency"
+msgstr "Pénznem"
+
+#: product/models.py:214
+msgid "price"
+msgstr "Ár"
+
+#: product/models.py:224 product/models.py:225
+msgid "Product price"
+msgstr "Termékár"
+
+#: profil/models.py:8
+msgid "other name"
+msgstr "Másik név"
+
+#: profil/models.py:9
+msgid "profile image"
+msgstr "Profilkép"
+
+#: profil/models.py:17
+msgid "japanese_address"
+msgstr "Japán cím"
+
+#: profil/models.py:25
+msgid "japanese_billing_address"
+msgstr "Japán számlázási cím"
+
+#: profil/models.py:33
+msgid "hungarian_address"
+msgstr "Magyar cím"
+
+#: profil/models.py:41
+msgid "hungarian_billing_address"
+msgstr "Magyar számlázási cím"
+
+#: profil/models.py:45
+msgid "User"
+msgstr "Felhasználó"
+
+#: profil/models.py:46
+msgid "Users"
+msgstr "Felhasználók"
+
+#: shop/models.py:6 shop/models.py:20
+msgid "start date and time"
+msgstr "Kezdési dátum és idő"
+
+#: shop/models.py:7 shop/models.py:21
+msgid "period"
+msgstr "Periódus"
+
+#: shop/models.py:13
+msgid "Sale"
+msgstr "Leárazás"
+
+#: shop/models.py:14
+msgid "Sales"
+msgstr "Leárazások"
+
+#: shop/models.py:27 shop/models.py:28
+msgid "Campaign"
+msgstr "Kampány"

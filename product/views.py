@@ -1,4 +1,6 @@
-from rest_framework import authentication, permissions, viewsets, filters
+from rest_framework import authentication, permissions, viewsets, filters, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 import django_filters.rest_framework
 
 from .models import Product
@@ -82,3 +84,7 @@ class ProductPriceViewSet(DefaultsMixin, viewsets.ModelViewSet):
   serializer_class = ProductPriceSerializer
   search_fields = ('product', 'currency', 'price', )
   ordering_fields = ('product', 'price', )
+
+class LogOutViewSet(DefaultsMixin, viewsets.ViewSet):
+  def list(self, request, format=None):
+    return Response(status=status.HTTP_401_UNAUTHORIZED)

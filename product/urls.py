@@ -9,7 +9,7 @@ from .views import ProductCategoryViewSet
 from .views import ProductPriceViewSet
 from .views import ProductStatusViewSet
 from .views import ProductStorageLocationViewSet
-
+from .views import LogOutViewSet
 
 router = DefaultRouter()
 router.register(r'products', ProductViewSet)
@@ -21,3 +21,4 @@ router.register(r'storagelocations', ProductStorageLocationViewSet)
 router.register(r'orders', OrderViewSet)
 router.register(r'sales', SaleViewSet)
 router.register(r'campaigns', CampaignViewSet)
+router.register(r'logout', LogOutViewSet, base_name='logout')

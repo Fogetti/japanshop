@@ -1,0 +1,3 @@
+export const LOGOUT_START = 'LOGOUT_START';
+export const LOGOUT_FAILED = 'LOGOUT_FAILED';
+export const LOGOUT_SUCCEEDED = 'LOGOUT_SUCCEEDED';

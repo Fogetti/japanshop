@@ -6,23 +6,28 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 
 import thunk from 'redux-thunk';
 import api from './middleware/API';
-import products from './products/LoadProductsReducer';
+import allProducts from './products/LoadProductsReducer';
 import categories from './products/LoadCategoriesReducer';
+import productsByCategories from './products/LoadProductsByCategoryReducer';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import './index.css';
 import 'semantic-ui-css/semantic.min.css';
 
 const reducer = combineReducers({
-  products,
-  categories
+  allProducts,
+  categories,
+  productsByCategories
 });
 const store = createStore(reducer, applyMiddleware(thunk, api));
 const rootEl = document.getElementById('root');
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>
 , rootEl);
 

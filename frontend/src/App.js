@@ -31,29 +31,33 @@ class App extends Component {
       <div >
         <Header>
           {this.props.categories.stillLoading ? (
-            <Menu inverted>
-            {[...Array(5).keys()].map((value, index) => {
-              return (
-                <Menu.Item key={index}>
-                  <Placeholder inverted>
-                    <Placeholder.Paragraph>
-                      <Placeholder.Line length="medium">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      </Placeholder.Line>
-                    </Placeholder.Paragraph>
-                  </Placeholder>
-                </Menu.Item>
-              )
-              })}
-              <Menu.Item>Log out</Menu.Item>
-            </Menu>) : (
-            <Menu inverted>
-              {this.props.categories.map(category => {
-                return (<Menu.Item key={category.id} name={category.name} active={category.name === 'home'} onClick={this.handleItemClick} />)
-              })}
-              <a href="#" onClick={this.props.logout}><Menu.Item>Log out</Menu.Item></a>
-            </Menu>
-          )}
+            <Container>
+              <Menu stackable>
+              {[...Array(5).keys()].map((value, index) => {
+                return (
+                  <Menu.Item key={index}>
+                    <Placeholder>
+                      <Placeholder.Paragraph>
+                        <Placeholder.Line length="medium">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </Placeholder.Line>
+                      </Placeholder.Paragraph>
+                    </Placeholder>
+                  </Menu.Item>
+                )
+                })}
+                <Menu.Item>Log out</Menu.Item>
+              </Menu>
+            </Container>) : (
+            <Container>
+              <Menu stackable>
+                {this.props.categories.map(category => {
+                  return (<Menu.Item key={category.id} name={category.name} active={category.name === 'home'} onClick={this.handleItemClick} />)
+                })}
+                <a href="#" onClick={this.props.logout}><Menu.Item>Log out</Menu.Item></a>
+              </Menu>
+            </Container>
+        )}
         </Header>
         <Container>
           <Table celled>

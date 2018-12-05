@@ -27,3 +27,7 @@ class ProductFilter(django_filters.FilterSet):
   class Meta:
     model = Product
     fields = ('category', 'created_min', 'created_max', )
+  
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.filters['category'].extra.update({'to_field_name': 'name'})

@@ -110,10 +110,10 @@ class Product(TimeStampedModel):
 
   description = models.TextField(_('description'), blank=True)
 
-  image1 = models.ImageField(_('image1'), blank=True)
-  image2 = models.ImageField(_('image2'), blank=True)
-  image3 = models.ImageField(_('image3'), blank=True)
-  image4 = models.ImageField(_('image4'), blank=True)
+  image1 = models.ImageField(_('image1'), blank=True, upload_to='images')
+  image2 = models.ImageField(_('image2'), blank=True, upload_to='images')
+  image3 = models.ImageField(_('image3'), blank=True, upload_to='images')
+  image4 = models.ImageField(_('image4'), blank=True, upload_to='images')
 
   class Meta:
     verbose_name = _('Product')

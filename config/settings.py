@@ -128,3 +128,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = "profil.User"
+MEDIA_ROOT = BASE_DIR
+MEDIA_URL = '/'

@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
 LOCALE_PATHS = (
-    BASE_DIR + "/locale",
+    BASE_DIR + '/locale',
 )
 
 LANGUAGE_CODE = 'hu'
@@ -127,6 +127,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = "profil.User"
+AUTH_USER_MODEL = 'profil.User'
+
 MEDIA_ROOT = BASE_DIR
 MEDIA_URL = '/'
